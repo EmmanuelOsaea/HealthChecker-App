@@ -17,7 +17,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+// Load last saved result (if any)
+val sharedPref = getSharedPreferences("HealthPrefs", MODE_PRIVATE)
+val lastText = sharedPref.getString("lastResultText", null)
+val lastColor = sharedPref.getInt("lastResultColor", Color.WHITE)
 
+if (lastText != null) {
+    binding.tvResult.text = lastText
+    binding.resultContainer.setBackgroundColor(lastColor)
+}
+          
         viewModel = HealthViewModel(this)
 
         binding.btnRunCheck.setOnClickListener {
