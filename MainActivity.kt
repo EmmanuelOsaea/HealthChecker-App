@@ -40,9 +40,28 @@ class MainActivity : AppCompatActivity() {
 
         delay(1500) // simulate analysis time
 
-        binding.tvResult.text = "You're in good health! ✅"
-        binding.resultContainer.setBackgroundColor(Color.GREEN)
 
+      // Random outcome simulation
+        val outcome = listOf("Healthy", "Caution", "Alert").random()
+
+        when (outcome) {
+            "Healthy" -> {
+        
+        binding.tvResult.text = "You're in good health! ✅
+                Keep it up!"
+        binding.resultContainer.setBackgroundColor(Color.parseColor("4CAF50"))
+
+        "Caution" -> {
+                binding.tvResult.text = "⚠️ Minor issues detected. Take a short rest."
+                binding.resultContainer.setBackgroundColor(Color.parseColor("#FFC107")) // yellow
+            }
+            "Alert" -> {
+                binding.tvResult.text = "❌ High stress or irregular vitals detected!"
+                binding.resultContainer.setBackgroundColor(Color.parseColor("#F44336")) // red
+            }
+        }
+
+         
         fadeInResult()
 
         binding.loadingSpinner.visibility = View.GONE  // hide spinner
