@@ -58,15 +58,22 @@ if (lastText != null) {
         
         binding.tvResult.text = "You're in good health! ✅
                 Keep it up!"
-        binding.resultContainer.setBackgroundColor(Color.parseColor("4CAF50"))
+               val historyRepo = HealthHistoryRepository(this)
+historyRepo.saveResult(outcome, binding.tvResult.text.toString())
+                binding.resultContainer.setBackgroundColor(Color.parseColor("4CAF50"))
 
         "Caution" -> {
                 binding.tvResult.text = "⚠️ Minor issues detected. Take a short rest."
+val historyRepo = HealthHistoryRepository(this)
+historyRepo.saveResult(outcome, binding.tvResult.text.toString())
+            
                 binding.resultContainer.setBackgroundColor(Color.parseColor("#FFC107")) // yellow
             }
             "Alert" -> {
                 binding.tvResult.text = "❌ High stress or irregular vitals detected!"
-                binding.resultContainer.setBackgroundColor(Color.parseColor("#F44336")) // red
+             val historyRepo = HealthHistoryRepository(this)
+historyRepo.saveResult(outcome, binding.tvResult.text.toString())
+          binding.resultContainer.setBackgroundColor(Color.parseColor("#F44336")) // red
             }
         }
 
