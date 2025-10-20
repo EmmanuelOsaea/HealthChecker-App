@@ -41,3 +41,16 @@ binding.btnClearHistory.setOnClickListener {
     repo.clearHistory()
     binding.tvHistory.text = "History cleared successfully."
 }
+
+binding.btnClearHistory.setOnClickListener {
+    AlertDialog.Builder(this)
+        .setTitle("Confirm Deletion")
+        .setMessage("Are you sure you want to clear all health records?")
+        .setPositiveButton("Yes") { _, _ ->
+            val repo = HealthHistoryRepository(this)
+            repo.clearHistory()
+            binding.tvHistory.text = "History cleared successfully."
+        }
+        .setNegativeButton("No", null)
+        .show()
+}
