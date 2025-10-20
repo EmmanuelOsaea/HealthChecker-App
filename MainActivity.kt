@@ -34,6 +34,10 @@ if (lastText != null) {
         }
     }
 
+    binding.btnViewHistory.setOnClickListener {
+    val intent = Intent(this, HistoryActivity::class.java)
+    startActivity(intent)
+}
     private fun runHealthCheck() {
        binding.loadingSpinner.visibility = View.VISIBLE  // show spinner
        binding.btnRunCheck.isEnabled = false             // disable button
