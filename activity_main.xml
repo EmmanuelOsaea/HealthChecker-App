@@ -101,3 +101,9 @@
     android:layout_marginTop="16dp"
     style="?android:attr/progressBarStyleLarge" />
         
+<Button
+    android:id="@+id/btnViewHistory"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="View History"
+    android:layout_marginTop="12dp" />
