@@ -26,8 +26,33 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun runHealthCheck() {
-        binding.progressBar.visibility = View.VISIBLE
-        binding.tvResult.text = "Analyzing health data..."
+       binding.loadingSpinner.visibility = View.VISIBLE  // show spinner
+       binding.btnRunCheck.isEnabled = false             // disable button
+       CoroutineScope(Dispatchers.Main).launch {
+       binding.tvResult.text = "Analyzing your vitals..."
+        binding.resultContainer.setBackgroundColor(Color.LTGRAY)
+
+        // Pulse while loading
+        for (i in 1..3) {
+            pulseButton()
+            delay(600)
+        }
+
+        delay(1500) // simulate analysis time
+
+        binding.tvResult.text = "You're in good health! ✅"
+        binding.resultContainer.setBackgroundColor(Color.GREEN)
+
+        fadeInResult()
+
+        binding.loadingSpinner.visibility = View.GONE  // hide spinner
+        binding.btnRunCheck.isEnabled = true           // re-enable button
+    }
+}
+        
+           binding.progressBar.visibility = View.VISIBLE
+        
+           binding.tvResult.text = "Analyzing health data..."
         GlobalScope.launch(Dispatchers.Main) {
             delay(1500)
             binding.progressBar.visibility = View.GONE
