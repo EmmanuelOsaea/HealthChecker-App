@@ -22,6 +22,9 @@ class HealthHistoryRepository(private val context: Context) {
         prefs.edit().putString("history", jsonArray.toString()).apply()
     }
 
+    fun clearHistory() {
+    prefs.edit().remove("history").apply()
+}
     fun getHistory(): JSONArray {
         val existing = prefs.getString("history", "[]")
         return JSONArray(existing)
