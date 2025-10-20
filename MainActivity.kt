@@ -46,6 +46,40 @@ class MainActivity : AppCompatActivity() {
             """.trimIndent()
 
             binding.tvResult.text = result
+        fadeInResult()
         }
     }
+}
+
+private fun fadeInResult() {
+    binding.resultContainer.alpha = 0f
+    binding.resultContainer.animate()
+        .alpha(1f)
+        .setDuration(600)
+        .start()
+}
+
+private fun pulseButton() {
+    binding.btnRunCheck.animate()
+        .scaleX(1.1f)
+        .scaleY(1.1f)
+        .setDuration(300)
+        .withEndAction {
+            binding.btnRunCheck.animate()
+                .scaleX(1f)
+                .scaleY(1f)
+                .setDuration(300)
+                .start()
+        }
+        .start()
+}
+
+// Simulate loading or data check
+binding.tvResult.text = "Analyzing your vitals..."
+binding.resultContainer.setBackgroundColor(Color.LTGRAY)
+
+// Start pulsing the button while checking
+for (i in 1..3) {
+    pulseButton()
+    delay(600)
 }
