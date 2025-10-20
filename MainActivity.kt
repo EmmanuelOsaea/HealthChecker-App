@@ -127,3 +127,15 @@ for (i in 1..3) {
     pulseButton()
     delay(600)
 }
+
+
+
+
+
+// Save the last result locally
+val sharedPref = getSharedPreferences("HealthPrefs", MODE_PRIVATE)
+with(sharedPref.edit()) {
+    putString("lastResultText", binding.tvResult.text.toString())
+    putInt("lastResultColor", (binding.resultContainer.background as? ColorDrawable)?.color ?: Color.WHITE)
+    apply()
+}
