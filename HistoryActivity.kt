@@ -35,3 +35,9 @@ class HistoryActivity : AppCompatActivity() {
         binding.tvHistory.text = displayText.toString()
     }
 }
+
+binding.btnClearHistory.setOnClickListener {
+    val repo = HealthHistoryRepository(this)
+    repo.clearHistory()
+    binding.tvHistory.text = "History cleared successfully."
+}
