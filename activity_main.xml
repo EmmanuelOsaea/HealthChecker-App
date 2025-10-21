@@ -1,109 +1,64 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:background="#F9FAFB"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp">
-
-    <TextView
-        android:id="@+id/tvTitle"
-        android:text="Smart Health Checker"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="#222222"
-        android:layout_marginBottom="16dp"/>
-
-    <TextView
-        android:id="@+id/tvResult"
-        android:text="Tap below to run a quick health check."
-        android:textSize="16sp"
-        android:textColor="#444444"
-        android:layout_marginBottom="24dp"/>
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center"
+    android:background="#F5F5F5">
 
     <Button
-        android:id="@+id/btnRunCheck"
-        android:text="Run Check"
-        android:backgroundTint="#007BFF"
+        android:id="@+id/btnCheckHealth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Check My Health"
+        android:backgroundTint="#2196F3"
         android:textColor="#FFFFFF"
-        android:padding="12dp"
-        android:elevation="6dp"
-        android:layout_marginBottom="20dp"/>
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:visibility="gone"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_marginTop="10dp"/>
-</LinearLayout>
-
-
-        <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:background="#F9FAFB"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="20dp">
-
-    <TextView
-        android:id="@+id/tvTitle"
-        android:text="Smart Health Checker"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="#222222"
-        android:layout_marginBottom="16dp"/>
+        android:padding="12dp" />
 
     <LinearLayout
         android:id="@+id/resultContainer"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:background="@drawable/result_bg"
-        android:padding="20dp"
-        android:layout_marginBottom="24dp">
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/tvResult"
-            android:text="Tap below to run a quick health check."
-            android:textSize="16sp"
-            android:textColor="#444444"
-            android:layout_gravity="center"/>
-
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your result will appear here"
+            android:textSize="18sp"
+            android:textColor="#000000" />
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnRunCheck"
-        android:text="Run Check"
-        android:backgroundTint="#007BFF"
-        android:textColor="#FFFFFF"
-        android:padding="12dp"
-        android:elevation="6dp"
-        android:layout_marginBottom="20dp"/>
+        android:id="@+id/btnViewTips"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View Health Tip"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#4CAF50"
+        android:textColor="#FFFFFF" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:visibility="gone"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_marginTop="10dp"/>
+    <TextView
+        android:id="@+id/tvTips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Tap to get a health tip"
+        android:textColor="#555555"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btnViewHistory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View History"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#FF9800"
+        android:textColor="#FFFFFF" />
+
 </LinearLayout>
-
-
-<ProgressBar
-    android:id="@+id/loadingSpinner"
-    android:layout_width="40dp"
-    android:layout_height="40dp"
-    android:layout_gravity="center"
-    android:indeterminate="true"
-    android:visibility="gone"
-    android:layout_marginTop="16dp"
-    style="?android:attr/progressBarStyleLarge" />
-        
-<Button
-    android:id="@+id/btnViewHistory"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="View History"
-    android:layout_marginTop="12dp" />
