@@ -1,27 +1,29 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:background="#007BFF">
+    android:background="@color/white"
+    tools:context=".SplashActivity">
 
+    <!-- App Logo -->
     <ImageView
-        android:src="@drawable/ic_health_logo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:contentDescription="App Logo"
-        android:layout_marginBottom="16dp" />
+        android:id="@+id/logo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/your_logo" />
 
+    <!-- Tagline -->
     <TextView
-        android:text="Smart Health Checker"
-        android:textColor="#FFFFFF"
-        android:textSize="22sp"
+        android:id="@+id/tagline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Your Health, Your Power"
+        android:textSize="18sp"
         android:textStyle="bold"
-        android:layout_marginBottom="8dp"/>
+        android:textColor="@color/black" />
 
-    <TextView
-        android:text="Analyzing your well-being..."
-        android:textColor="#E0E0E0"
-        android:textSize="14sp"/>
-
-</LinearLayout>
+</RelativeLayout>
