@@ -1,32 +1,26 @@
-package com.example.healthchecker.data
+package com.example.healthguardian.data
 
 import android.content.Context
-import org.json.JSONArray
-import org.json.JSONObject
+import android.content.SharedPreferences
 
-class HealthHistoryRepository(private val context: Context) {
+class HealthHistoryRepository(context: Context) {
 
-    private val prefs = context.getSharedPreferences("HealthHistory", Context.MODE_PRIVATE)
+    private val sharedPrefs: SharedPreferences =
+        context.getSharedPreferences("health_history", Context.MODE_PRIVATE)
 
     fun saveResult(status: String, message: String) {
-        val existing = prefs.getString("history", "[]")
-        val jsonArray = JSONArray(existing)
+        val oldHistory = sharedPrefs.getString("history", "") ?: ""
+        val newEntry = "🩺 Status: $status\n$message\nTime: ${java.util.Date()}\n"
+        val updatedHistory = "$newEntry\n-------------------------\n$oldHistory"
+        sharedPrefs.edit().putString("history", updatedHistory).apply()
+    }
 
-        val newEntry = JSONObject()
-        newEntry.put("status", status)
-        newEntry.put("message", message)
-        newEntry.put("timestamp", System.currentTimeMillis())
-
-        jsonArray.put(newEntry)
-
-        prefs.edit().putString("history", jsonArray.toString()).apply()
+    fun getHistory(): List<String> {
+        val historyString = sharedPrefs.getString("history", "") ?: ""
+        return if (historyString.isEmpty()) emptyList() else historyString.split("-------------------------")
     }
 
     fun clearHistory() {
-    prefs.edit().remove("history").apply()
-}
-    fun getHistory(): JSONArray {
-        val existing = prefs.getString("history", "[]")
-        return JSONArray(existing)
+        sharedPrefs.edit().remove("history").apply()
     }
 }
