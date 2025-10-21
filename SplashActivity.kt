@@ -36,3 +36,8 @@ finish()
 }
 
 
+val logo: ImageView = findViewById(R.id.logo)
+val tagline: TextView = findViewById(R.id.tagline)
+val animation = AnimationUtils.loadAnimation(this, R.anim.logo_fade_in)
+logo.startAnimation(animation)
+tagline.startAnimation(animation)
