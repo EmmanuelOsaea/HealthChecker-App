@@ -18,24 +18,24 @@ class SplashActivity : AppCompatActivity() {
 
 val logo: ImageView = findViewById(R.id.logo)
 val tagline: TextView = findViewById(R.id.tagline)
-val animation = AnimationUtils.loadAnimation(this, R.anim.logo_fade_in)
-logo.startAnimation(animation)
-tagline.startAnimation(animation)
-    
-        // Launch the main activity after a 2.5s delay
-        CoroutineScope(Dispatchers.Main).launch {
-            delay(2500)
+val rootLayout: View = findViewById(R.id.splashRoot)
 
+// Start logo + tagline fade-in
+val fadeInAnim = AnimationUtils.loadAnimation(this, R.anim.logo_fade_in)
+logo.startAnimation(fadeInAnim)
+tagline.startAnimation(fadeInAnim)
 
+// Delay before transitioning
 Handler(Looper.getMainLooper()).postDelayed({
+    // Start fade-out of entire splash
     val fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out)
-    val rootLayout: View = findViewById(R.id.splashRoot)
     rootLayout.startAnimation(fadeOut)
 
     fadeOut.setAnimationListener(object : Animation.AnimationListener {
         override fun onAnimationStart(animation: Animation?) {}
 
         override fun onAnimationEnd(animation: Animation?) {
+            // Switch to MainActivity after fade
             val intent = Intent(this@SplashActivity, MainActivity::class.java)
             startActivity(intent)
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
@@ -44,9 +44,7 @@ Handler(Looper.getMainLooper()).postDelayed({
 
         override fun onAnimationRepeat(animation: Animation?) {}
     })
-}, 2000) // Wait 2 seconds before transition
-
-
+}, 2000) // Wait 2 seconds before starting fade-out
 
             
 val intent = Intent(this@SplashActivity, MainActivity::class.java)
