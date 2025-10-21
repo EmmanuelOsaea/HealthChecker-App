@@ -19,11 +19,14 @@ class SplashActivity : AppCompatActivity() {
         // Launch the main activity after a 2.5s delay
         CoroutineScope(Dispatchers.Main).launch {
             delay(2500)
-            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
-            finish() // close splash screen
+
+val intent = Intent(this@SplashActivity, MainActivity::class.java)
+startActivity(intent)
+overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+finish()
+           
         }
     }
 }
 
-startActivity(Intent(this@SplashActivity, MainActivity::class.java))
-finish()
+
