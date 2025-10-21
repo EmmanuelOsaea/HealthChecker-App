@@ -46,6 +46,10 @@ Handler(Looper.getMainLooper()).postDelayed({
     })
 }, 2000) // Wait 2 seconds before starting fade-out
 
+val bgAnim = AnimatorInflater.loadAnimator(this, R.anim.bg_color_transition)
+bgAnim.setTarget(rootLayout)
+bgAnim.start()
+
             
 val intent = Intent(this@SplashActivity, MainActivity::class.java)
 startActivity(intent)
