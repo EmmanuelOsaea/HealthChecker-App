@@ -26,6 +26,29 @@ tagline.startAnimation(animation)
         CoroutineScope(Dispatchers.Main).launch {
             delay(2500)
 
+
+Handler(Looper.getMainLooper()).postDelayed({
+    val fadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out)
+    val rootLayout: View = findViewById(R.id.splashRoot)
+    rootLayout.startAnimation(fadeOut)
+
+    fadeOut.setAnimationListener(object : Animation.AnimationListener {
+        override fun onAnimationStart(animation: Animation?) {}
+
+        override fun onAnimationEnd(animation: Animation?) {
+            val intent = Intent(this@SplashActivity, MainActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+            finish()
+        }
+
+        override fun onAnimationRepeat(animation: Animation?) {}
+    })
+}, 2000) // Wait 2 seconds before transition
+
+
+
+            
 val intent = Intent(this@SplashActivity, MainActivity::class.java)
 startActivity(intent)
 overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
