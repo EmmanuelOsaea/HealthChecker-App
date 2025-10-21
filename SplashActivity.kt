@@ -16,6 +16,12 @@ class SplashActivity : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+val logo: ImageView = findViewById(R.id.logo)
+val tagline: TextView = findViewById(R.id.tagline)
+val animation = AnimationUtils.loadAnimation(this, R.anim.logo_fade_in)
+logo.startAnimation(animation)
+tagline.startAnimation(animation)
+    
         // Launch the main activity after a 2.5s delay
         CoroutineScope(Dispatchers.Main).launch {
             delay(2500)
