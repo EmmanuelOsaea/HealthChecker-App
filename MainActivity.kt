@@ -70,11 +70,49 @@ class MainActivity : AppCompatActivity() {
         val fadeIn = ObjectAnimator.ofFloat(binding.tvResult, "alpha", 0f, 1f)
         fadeIn.duration = 800
         fadeIn.start()
-    }
-
-    private fun pulseButton() {
-        val pulse = ObjectAnimator.ofFloat(binding.btnCheckHealth, "scaleX", 1f, 1.1f, 1f)
-        pulse.duration = 400
-        pulse.start()
+    binding.resultContainer.apply {
+        alpha = 0f
+        translationY = 50f  // start slightly below
+        visibility = View.VISIBLE
+        animate()
+            .alpha(1f)
+            .translationY(0f)
+            .setDuration(600)
+            .start()
     }
 }
+    }
+
+    
+private fun pulseButton() {
+    binding.btnRunCheck.animate()
+        .scaleX(1.1f)
+        .scaleY(1.1f)
+        .setDuration(300)
+        .withEndAction {
+            binding.btnRunCheck.animate()
+                .scaleX(1f)
+                .scaleY(1f)
+                .setDuration(300)
+                .start()
+        }
+        .start()
+}
+
+
+private fun animateTip(tipView: TextView) {
+    tipView.apply {
+        alpha = 0f
+        translationX = -30f  // start slightly left
+        visibility = View.VISIBLE
+        animate()
+            .alpha(1f)
+            .translationX(0f)
+            .setDuration(500)
+            .setStartDelay(200)  // small delay for staggered effect
+            .start()
+    }
+}
+
+binding.tvResult.text = result
+animateTip(binding.tvResult)  // assuming tip is in the same TextView
