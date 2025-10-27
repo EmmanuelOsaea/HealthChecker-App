@@ -12,10 +12,9 @@ import kotlin.random.Random
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-
-
-
-
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlinx.coroutines.Dispatchers
 
 
 class MainActivity : AppCompatActivity() {
@@ -28,7 +27,34 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+ 
+        db = HealthDatabase.getDatabase(this)
 
+        binding.btnCalculateBMI.setOnClickListener {
+            val weight = binding.etWeight.text.toString().toDoubleOrNull() ?: 0.0
+            val height = binding.etHeight.text.toString().toDoubleOrNull() ?: 1.0
+            val bmi = weight / ((height / 100) * (height / 100))
+            val category = when {
+                bmi < 18.5 -> "Underweight"
+                bmi in 18.5..24.9 -> "Normal"
+                bmi in 25.0..29.9 -> "Overweight"
+                else -> "Obese"
+            }
+            binding.tvResult.text = "BMI: %.2f (%s)".format(bmi, category)
+
+            val data = HealthData(
+                date = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date()),
+                bmi = bmi,
+                steps = (3000..10000).random(),
+                waterIntake = (1500..3000).random()
+            )
+
+            CoroutineScope(Dispatchers.IO).launch {
+                db.healthDao().insertData(data)
+            }
+        }
+    }
+}
         tipRepo = HealthTipRepository(this)
         historyRepo = HealthHistoryRepository(this)
 
@@ -50,6 +76,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+    
     private fun simulateHealthCheck(): String {
         val options = listOf("Healthy", "Caution", "Alert")
         return options.random()
