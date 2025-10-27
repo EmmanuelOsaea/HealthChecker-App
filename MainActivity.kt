@@ -1,4 +1,5 @@
 package com.example.healthguardian.ui
+package com.example.healthchecker
 
 import android.animation.ObjectAnimator
 import android.graphics.Color
@@ -8,6 +9,14 @@ import com.example.healthguardian.data.HealthHistoryRepository
 import com.example.healthguardian.data.HealthTipRepository
 import com.example.healthguardian.databinding.ActivityMainBinding
 import kotlin.random.Random
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
+
+
+
+
+
 
 class MainActivity : AppCompatActivity() {
 
