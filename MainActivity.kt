@@ -164,3 +164,8 @@ private fun animateTip(tipView: TextView) {
 
 binding.tvResult.text = result
 animateTip(binding.tvResult)  // assuming tip is in the same TextView
+
+binding.viewStatsButton.setOnClickListener {
+    val intent = Intent(this, HealthStatsActivity::class.java)
+    startActivity(intent)
+}
