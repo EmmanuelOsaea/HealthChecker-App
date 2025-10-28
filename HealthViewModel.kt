@@ -31,3 +31,9 @@ private val _records = MutableLiveData<List<HealthRecord>>()
         }
     }
 }
+
+fun getBmiEntries(): List<Entry> {
+    return _records.value?.mapIndexed { index, record ->
+        Entry(index.toFloat(), record.bmi)
+    } ?: emptyList()
+}
