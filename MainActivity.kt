@@ -77,7 +77,20 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+viewModel.records.observe(this) { records ->
+    // Update chart when records change
+    val entries = viewModel.getBmiEntries()
+    val dataSet = LineDataSet(entries, "BMI Trend")
+    dataSet.color = Color.BLUE
+    dataSet.valueTextColor = Color.BLACK
+    dataSet.lineWidth = 2f
+    dataSet.circleRadius = 4f
+    dataSet.setCircleColor(Color.RED)
 
+    val lineData = LineData(dataSet)
+    binding.bmiChart.data = lineData
+    binding.bmiChart.invalidate()
+}
 
 
 
