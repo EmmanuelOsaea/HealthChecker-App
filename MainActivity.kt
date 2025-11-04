@@ -1,6 +1,7 @@
 package com.example.healthguardian.ui
 package com.example.healthchecker
 
+import android.os.Looper
 import android.animation.ObjectAnimator
 import android.graphics.Color
 import android.os.Bundle
@@ -16,18 +17,98 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlinx.coroutines.Dispatchers
 import android.widget.TextView
+import android.os.Handler
+import android.widget.Button
+import android.widget.ProgressBar
+import android.media.MediaPlayer
+import android.view.animation.Animation
+import android.view.animation.ScaleAnimation
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var tipRepo: HealthTipRepository
     private lateinit var historyRepo: HealthHistoryRepository
-
+    private lateinit var mediaPlayer: MediaPlayer
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_main)  
+val checkButton: Button = findViewById(R.id.check_button)
+        val progressBar: ProgressBar = findViewById(R.id.progress_bar)
 
+        mediaPlayer = MediaPlayer.create(this, R.raw.heartbeat)
+
+        checkButton.setOnClickListener {
+            healthStatus.text = "Analyzing your health data..."
+            progressBar.visibility = ProgressBar.VISIBLE
+            checkButton.isEnabled = false
+
+            // Start heartbeat sound
+            mediaPlayer.isLooping = true
+            mediaPlayer.start()
+
+            // Pulse animation for progress bar
+            val pulse = ScaleAnimation(
+                1f, 1.2f, 1f, 1.2f,
+                Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f
+            ).apply {
+                duration = 600
+                repeatMode = Animation.REVERSE
+                repeatCount = Animation.INFINITE
+            }
+            progressBar.startAnimation(pulse)
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                progressBar.clearAnimation()
+                progressBar.visibility = ProgressBar.GONE
+                mediaPlayer.pause()
+                checkButton.isEnabled = true
+
+                val bmi = calculateBMI(70.0, 1.75)
+                val hydration = checkHydration(8)
+                val heartRate = simulateHeartRate()
+
+                val result = """
+                    ✅ Health Summary:
+                    - BMI: $bmi (${bmiStatus(bmi)})
+                    - Hydration: $hydration
+                    - Heart Rate: $heartRate bpm
+                """.trimIndent()
+
+                healthStatus.text = result
+            }, 2500)
+        }
+    }
+
+    private fun calculateBMI(weight: Double, height: Double): Double {
+        return String.format("%.1f", weight / (height * height)).toDouble()
+    }
+
+    private fun bmiStatus(bmi: Double): String {
+        return when {
+            bmi < 18.5 -> "Underweight"
+            bmi < 25 -> "Normal"
+            bmi < 30 -> "Overweight"
+            else -> "Obese"
+        }
+    }
+
+    private fun checkHydration(glasses: Int): String {
+        return if (glasses >= 8) "Well hydrated 💧" else "Drink more water 🚰"
+    }
+
+    private fun simulateHeartRate(): Int {
+        return Random.nextInt(60, 100)
+    }
+
+
+
+
+
+        
      val healthStatus: TextView = findViewById(R.id.health_status)
         healthStatus.text = "Welcome to Health Checker App 💪🏿"
     }
