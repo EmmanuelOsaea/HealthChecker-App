@@ -63,6 +63,18 @@
         android:backgroundTint="#FF9800"
         android:textColor="#FFFFFF" />
 
+    <Button
+        android:id="@+id/btnStartMonitoring"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Start Monitoring"/>
+        
+    <Button
+        android:id="@+id/btnStopMonitoring"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Stop Monitoring"
+        android:layout_marginTop="16dp"/>
 </LinearLayout>
 
 <com.github.mikephil.charting.charts.LineChart
