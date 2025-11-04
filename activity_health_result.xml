@@ -14,7 +14,18 @@
         android:layout_marginBottom="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
+    <TextView
+    android:id="@+id/messageText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Analyzing..."
+    android:textSize="18sp"
+    android:textStyle="bold"
+    android:textColor="#555"
+    android:layout_marginTop="16dp" />
+    
+    
+    
     <TextView
         android:id="@+id/tipsText"
         android:text="Health Tip will appear here"
@@ -22,7 +33,8 @@
         android:textColor="#2E7D32"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-<Button
+
+    <Button
     android:id="@+id/btnRecheck"
     android:text="Recheck Health"
     android:textSize="16sp"
