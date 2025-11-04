@@ -10,6 +10,37 @@ class HealthResultActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_health_result)
 
+        
+        val progressBar = findViewById<ProgressBar>(R.id.progressBar)
+        val scoreText = findViewById<TextView>(R.id.scoreText)
+
+        val score = intent.getIntExtra("score", 0)
+
+        // Animate from 0 to score
+        ObjectAnimator.ofInt(progressBar, "progress", 0, score).apply {
+            duration = 1500
+            interpolator = DecelerateInterpolator()
+            start()
+        }
+
+        // Animate number count up
+        ValueAnimator.ofInt(0, score).apply {
+            duration = 1500
+            addUpdateListener {
+                val animatedValue = it.animatedValue as Int
+                scoreText.text = "$animatedValue"
+            }
+            start()
+        }
+    }
+}
+
+
+     
+
+
+
+        
         val resultText: TextView = findViewById(R.id.resultText)
         val tipsText: TextView = findViewById(R.id.tipsText)
 
