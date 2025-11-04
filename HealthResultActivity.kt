@@ -33,7 +33,26 @@ recheckButton.setOnClickListener {
     finish() // Closes this activity and returns to MainActivity
 }
     
-    
+// Fade-in effect when this screen loads
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+
+        val score = intent.getIntExtra("score", 0)
+        resultText.text = "Your Health Score: $score/100"
+
+        // Load random tip from JSON file
+        val json = assets.open("health_tips.json").bufferedReader().use { it.readText() }
+        val tips = JSONObject(json).getJSONArray("tips")
+        val randomTip = tips.getString((0 until tips.length()).random())
+        tipsText.text = randomTip
+
+        // Recheck button returns to main screen
+        recheckButton.setOnClickListener {
+            finish()
+            overridePendingTransition(R.anim.fade_out, R.anim.fade_in)
+        }
+    }
+}
+
     
     }
 
