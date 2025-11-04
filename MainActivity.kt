@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlinx.coroutines.Dispatchers
-
+import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,9 +26,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
- 
-        db = HealthDatabase.getDatabase(this)
+        setContentView(R.layout.activity_main)  
+
+     val healthStatus: TextView = findViewById(R.id.health_status)
+        healthStatus.text = "Welcome to Health Checker App 💪🏿"
+    }
+}
+     db = HealthDatabase.getDatabase(this)
 
         binding.btnCalculateBMI.setOnClickListener {
             val weight = binding.etWeight.text.toString().toDoubleOrNull() ?: 0.0
