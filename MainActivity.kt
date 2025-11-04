@@ -78,7 +78,18 @@ val checkButton: Button = findViewById(R.id.check_button)
                     - Heart Rate: $heartRate bpm
                 """.trimIndent()
 
-                healthStatus.text = result
+                
+           
+            val intent = Intent(this, HealthResultActivity::class.java)
+intent.putExtra("BMI", bmi)
+intent.putExtra("HYDRATION", hydration)
+intent.putExtra("HEARTRATE", heartRate)
+startActivity(intent)
+            
+            
+            
+            
+            
             }, 2500)
         }
     }
