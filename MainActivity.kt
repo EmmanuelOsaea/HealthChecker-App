@@ -1,5 +1,5 @@
 package com.example.healthguardian.ui
-package com.example.healthchecker
+package com.example.healthcheckerapp
 
 import android.os.Looper
 import android.animation.ObjectAnimator
@@ -23,6 +23,10 @@ import android.widget.ProgressBar
 import android.media.MediaPlayer
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
+import android.content.Intent
+import android.widget.Toast
+import com.example.healthcheckerapp.services.HealthMonitorService
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,7 +39,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_main)  
-val checkButton: Button = findViewById(R.id.check_button)
+   
+        binding.btnStartMonitoring.setOnClickListener {
+            val intent = Intent(this, HealthMonitorService::class.java)
+            startForegroundService(intent)
+            Toast.makeText(this, "Monitoring Started", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.btnStopMonitoring.setOnClickListener {
+            stopService(Intent(this, HealthMonitorService::class.java))
+            Toast.makeText(this, "Monitoring Stopped", Toast.LENGTH_SHORT).show()
+        }
+    }
+}
+        val checkButton: Button = findViewById(R.id.check_button)
         val progressBar: ProgressBar = findViewById(R.id.progress_bar)
 
         mediaPlayer = MediaPlayer.create(this, R.raw.heartbeat)
