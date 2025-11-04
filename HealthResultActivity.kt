@@ -28,6 +28,13 @@ class HealthResultActivity : AppCompatActivity() {
 
         // Generate and show personalized tip
         tipsText.text = getHealthTip(bmi, hydration, heartRate)
+  val recheckButton: Button = findViewById(R.id.btnRecheck)
+recheckButton.setOnClickListener {
+    finish() // Closes this activity and returns to MainActivity
+}
+    
+    
+    
     }
 
     private fun bmiStatus(bmi: Double): String {
