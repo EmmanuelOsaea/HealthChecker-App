@@ -22,4 +22,17 @@
         android:textColor="#2E7D32"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+<Button
+    android:id="@+id/btnRecheck"
+    android:text="Recheck Health"
+    android:textSize="16sp"
+    android:textColor="#FFFFFF"
+    android:backgroundTint="#1E88E5"
+    android:layout_marginTop="24dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+
+
+        
+        
 </LinearLayout>
