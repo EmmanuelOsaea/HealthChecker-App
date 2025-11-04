@@ -190,19 +190,16 @@ viewModel.records.observe(this) { records ->
 
 
 
-
-
-
-
-
-
-
-    
-    private fun simulateHealthCheck(): String {
+   private fun simulateHealthCheck(): String {
         val options = listOf("Healthy", "Caution", "Alert")
         return options.random()
     }
 
+val intent = Intent(this, HealthResultActivity::class.java)
+intent.putExtra("score", score)
+startActivity(intent)
+overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+    
     private fun displayResult(outcome: String) {
         when (outcome) {
             "Healthy" -> {
