@@ -70,6 +70,29 @@ recheckButton.setOnClickListener {
         val score = intent.getIntExtra("score", 0)
         resultText.text = "Your Health Score: $score/100"
 
+val messageText = findViewById<TextView>(R.id.messageText)
+
+// Show motivational feedback based on score
+val message = when {
+    score >= 80 -> "💪 Excellent! You’re in great shape — keep it up!"
+    score >= 60 -> "👍 Good! Stay consistent with your healthy habits."
+    score >= 40 -> "⚠️ Fair! A few lifestyle changes can improve your health."
+    else -> "🚨 Poor! Consider consulting a doctor or nutritionist."
+}
+
+messageText.text = message
+messageText.alpha = 0f
+messageText.animate().alpha(1f).setDuration(1200).start()
+
+val messageColor = when {
+    score >= 80 -> Color.parseColor("#4CAF50")
+    score >= 60 -> Color.parseColor("#2196F3")
+    score >= 40 -> Color.parseColor("#FF9800")
+    else -> Color.parseColor("#F44336")
+}
+messageText.setTextColor(messageColor)
+
+
         // Load random tip from JSON file
         val json = assets.open("health_tips.json").bufferedReader().use { it.readText() }
         val tips = JSONObject(json).getJSONArray("tips")
