@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.healthguardian.MainActivity
 import com.example.healthguardian.databinding.ActivitySplashBinding
 import kotlinx.coroutines.*
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class SplashActivity : AppCompatActivity() {
 
@@ -16,7 +19,12 @@ class SplashActivity : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-val logo: ImageView = findViewById(R.id.logo)
+        lifecycleScope.launch {
+            delay(2000)
+            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+            finish()
+
+ val logo: ImageView = findViewById(R.id.logo)
 val tagline: TextView = findViewById(R.id.tagline)
 val rootLayout: View = findViewById(R.id.splashRoot)
 
@@ -66,3 +74,35 @@ val tagline: TextView = findViewById(R.id.tagline)
 val animation = AnimationUtils.loadAnimation(this, R.anim.logo_fade_in)
 logo.startAnimation(animation)
 tagline.startAnimation(animation)
+
+
+
+
+
+
+
+
+
+
+
+package com.example.healthcheckerpro
+
+import android.content.Intent
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+
+class SplashActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_splash)
+
+        lifecycleScope.launch {
+            delay(2000)
+            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+            finish()
+        }
+    }
+}
