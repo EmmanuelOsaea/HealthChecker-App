@@ -9,7 +9,19 @@
     android:gravity="center"
     android:background="#F5F5F5">
 
-    <Button
+    <ImageView
+    android:layout_width="120dp"
+    android:layout_height="120dp"
+    android:scaleType="centerCrop"
+    android:contentDescription="App Logo"
+    android:src="   " />
+  
+    
+    
+    
+    
+    
+  <Button
         android:id="@+id/btnCheckHealth"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
