@@ -14,7 +14,7 @@
     android:layout_height="120dp"
     android:scaleType="centerCrop"
     android:contentDescription="App Logo"
-    android:src="   " />
+    android:src="ic_launcher (1).png" />
   
     
     
