@@ -3,6 +3,8 @@ package com.example.healthchecker.data
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.lifecycle.LiveData
+import androidx.room.*
 
 @Dao
 interface HealthDao {
@@ -20,4 +22,12 @@ interface HealthDao {
 
     @Query("SELECT * FROM health_records ORDER BY id DESC")
     suspend fun getAllRecords(): List<HealthRecord>
+  
+    @Query("DELETE FROM health_data")
+    suspend fun clearAll()
 }
+
+
+
+
+
